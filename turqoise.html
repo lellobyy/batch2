@@ -1,0 +1,424 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DATE</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Comic+Neue:wght@400;700&display=swap');
+    
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-color: #FAFCFB;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23D0E1E8' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      font-family: 'Bubblegum Sans', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      overflow: visible;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 800px;
+      width: 100%;
+      padding: 20px;
+      position: relative;
+      overflow: visible;
+    }
+
+    .content {
+      background-color: #EBDFE1;
+      padding: 40px;
+      border-radius: 30px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      width: 100%;
+      max-width: 600px;
+      border: 8px solid #B7CEDE;
+      position: relative;
+      overflow: visible;
+    }
+
+    .content::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border: 3px dashed #DFB9B6;
+      border-radius: 26px;
+      pointer-events: none;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 3.2em;
+      color: #B7CEDE;
+      text-shadow: 3px 3px 0px #DFB9B6;
+      letter-spacing: 1px;
+      transform: rotate(-2deg);
+    }
+
+    p {
+      font-size: 1.6em;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 15px;
+      position: relative;
+      min-height: 60px;
+      overflow: visible;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Bubblegum Sans', cursive;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      min-width: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: all 0.6s ease;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary {
+      background-color: #B7CEDE;
+      color: white;
+      box-shadow: 0 6px 0 #9ABED4;
+      transition: all 0.5s ease;
+      transform-origin: center;
+      font-size: 1.2em;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 9px 0 #9ABED4;
+    }
+
+    .btn-primary:active {
+      transform: translateY(3px);
+      box-shadow: 0 3px 0 #9ABED4;
+    }
+
+    .btn-secondary {
+      background-color: #DFB9B6;
+      color: white;
+      box-shadow: 0 6px 0 #D0A8A5;
+      transition: all 0.3s ease;
+      font-size: 1.2em;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 9px 0 #D0A8A5;
+    }
+
+    .btn-secondary:active {
+      transform: translateY(3px);
+      box-shadow: 0 3px 0 #D0A8A5;
+    }
+
+    .decorative-corner {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      z-index: 1;
+    }
+
+    .top-left {
+      top: -20px;
+      left: -20px;
+    }
+
+    .top-right {
+      top: -20px;
+      right: -20px;
+      transform: rotate(90deg);
+    }
+
+    .bottom-left {
+      bottom: -20px;
+      left: -20px;
+      transform: rotate(270deg);
+    }
+
+    .bottom-right {
+      bottom: -20px;
+      right: -20px;
+      transform: rotate(180deg);
+    }
+
+    .cloud {
+      position: absolute;
+      z-index: -1;
+    }
+
+    .cloud-1 {
+      top: -40px;
+      left: 20%;
+      transform: scale(0.6);
+    }
+
+    .cloud-2 {
+      bottom: -30px;
+      right: 15%;
+      transform: scale(0.5);
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      animation: sparkle 2s infinite;
+    }
+
+    .sparkle-1 {
+      top: 20px;
+      right: 80px;
+      animation-delay: 0.3s;
+    }
+
+    .sparkle-2 {
+      bottom: 60px;
+      left: 50px;
+      animation-delay: 0.7s;
+    }
+
+    .sparkle-3 {
+      top: 50%;
+      right: 40px;
+      animation-delay: 1.1s;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0.5); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        padding: 30px 20px;
+      }
+      
+      h1 {
+        font-size: 2.5em;
+      }
+      
+      p {
+        font-size: 1.3em;
+      }
+      
+      .btn {
+        padding: 10px 20px;
+        min-width: 80px;
+      }
+      
+      .btn-primary {
+        font-size: 1em;
+      }
+      
+      .btn-secondary {
+        font-size: 1em;
+      }
+    }
+        /* Footer styling */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    color: #e3afb4;
+    background-color: rgba(242, 229, 228, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 2;
+    border-top: 1px solid rgba(247, 221, 222, 0.5);
+}
+
+.footer span {
+    font-weight: 600;
+    color: #E8A0A7;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="content">
+      <!-- Decorative corner elements -->
+      <svg class="decorative-corner top-left" viewBox="0 0 60 60">
+        <path d="M5,30 Q5,5 30,5 L5,5 Z" fill="#D0E1E8" stroke="#B7CEDE" stroke-width="2"></path>
+        <path d="M15,15 Q20,10 25,15 Q30,20 25,25 Q20,30 15,25 Q10,20 15,15 Z" fill="#DFB9B6" stroke="#EBDFE1" stroke-width="1.5"></path>
+      </svg>
+      
+      <svg class="decorative-corner top-right" viewBox="0 0 60 60">
+        <path d="M5,30 Q5,5 30,5 L5,5 Z" fill="#D0E1E8" stroke="#B7CEDE" stroke-width="2"></path>
+        <path d="M15,15 Q20,10 25,15 Q30,20 25,25 Q20,30 15,25 Q10,20 15,15 Z" fill="#DFB9B6" stroke="#EBDFE1" stroke-width="1.5"></path>
+      </svg>
+      
+      <svg class="decorative-corner bottom-left" viewBox="0 0 60 60">
+        <path d="M5,30 Q5,5 30,5 L5,5 Z" fill="#D0E1E8" stroke="#B7CEDE" stroke-width="2"></path>
+        <path d="M15,15 Q20,10 25,15 Q30,20 25,25 Q20,30 15,25 Q10,20 15,15 Z" fill="#DFB9B6" stroke="#EBDFE1" stroke-width="1.5"></path>
+      </svg>
+      
+      <svg class="decorative-corner bottom-right" viewBox="0 0 60 60">
+        <path d="M5,30 Q5,5 30,5 L5,5 Z" fill="#D0E1E8" stroke="#B7CEDE" stroke-width="2"></path>
+        <path d="M15,15 Q20,10 25,15 Q30,20 25,25 Q20,30 15,25 Q10,20 15,15 Z" fill="#DFB9B6" stroke="#EBDFE1" stroke-width="1.5"></path>
+      </svg>
+      
+      <!-- Cloud decorations -->
+      <svg class="cloud cloud-1" width="120" height="60" viewBox="0 0 120 60">
+        <path d="M20,50 Q5,50 5,35 Q5,20 20,20 Q25,5 45,10 Q60,0 75,10 Q95,5 100,20 Q115,20 115,35 Q115,50 100,50 Z" fill="#D0E1E8" opacity="0.7"></path>
+      </svg>
+      
+      <svg class="cloud cloud-2" width="120" height="60" viewBox="0 0 120 60">
+        <path d="M20,50 Q5,50 5,35 Q5,20 20,20 Q25,5 45,10 Q60,0 75,10 Q95,5 100,20 Q115,20 115,35 Q115,50 100,50 Z" fill="#D0E1E8" opacity="0.7"></path>
+      </svg>
+      
+      <!-- Sparkles -->
+      <svg class="sparkle sparkle-1" viewBox="0 0 24 24">
+        <path d="M12,0 L14,9 L23,12 L14,15 L12,24 L10,15 L1,12 L10,9 Z" fill="#DFB9B6"></path>
+      </svg>
+      
+      <svg class="sparkle sparkle-2" viewBox="0 0 24 24">
+        <path d="M12,0 L14,9 L23,12 L14,15 L12,24 L10,15 L1,12 L10,9 Z" fill="#B7CEDE"></path>
+      </svg>
+      
+      <svg class="sparkle sparkle-3" viewBox="0 0 24 24">
+        <path d="M12,0 L14,9 L23,12 L14,15 L12,24 L10,15 L1,12 L10,9 Z" fill="#DFB9B6"></path>
+      </svg>
+      
+      <h1> Serious Cute Question </h1>
+      <p>Would you like to go on a date with me?</p>
+      
+      <div class="buttons">
+        <button id="yesBtn" class="btn btn-primary">YES</button>
+        <button id="noBtn" class="btn btn-secondary">NO</button>
+      </div>
+    </div>
+  </div>
+            <!-- Footer -->
+    <div class="footer">Made by <span>Lellobyy</span></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const yesBtn = document.getElementById('yesBtn');
+      const noBtn = document.getElementById('noBtn');
+      const buttonsContainer = document.querySelector('.buttons');
+      const content = document.querySelector('.content');
+      let scaleFactor = 1;
+      let growthRate = 0.2;
+      
+      // Make buttons same size initially
+      function sizeButtonsEqually() {
+        const noBtnWidth = noBtn.offsetWidth;
+        const noBtnHeight = noBtn.offsetHeight;
+        
+        yesBtn.style.width = noBtnWidth + 'px';
+        yesBtn.style.height = noBtnHeight + 'px';
+      }
+      
+      // Set initial sizes
+      sizeButtonsEqually();
+      
+      // Adjust sizes if window resizes
+      window.addEventListener('resize', sizeButtonsEqually);
+      
+      function moveNoButton() {
+        // Calculate random position within content bounds
+        const contentRect = content.getBoundingClientRect();
+        const buttonWidth = noBtn.offsetWidth;
+        const buttonHeight = noBtn.offsetHeight;
+        
+        // Calculate available space (subtract button width/height)
+        const maxX = contentRect.width - buttonWidth - 40; // 40px padding
+        const maxY = contentRect.height - buttonHeight - 40; // 40px padding
+        
+        // Ensure the button doesn't go outside the content area
+        const randomX = Math.max(0, Math.floor(Math.random() * maxX));
+        const randomY = Math.max(0, Math.floor(Math.random() * maxY));
+        
+        // Position absolutely within content
+        noBtn.style.position = 'absolute';
+        noBtn.style.left = randomX + 'px';
+        noBtn.style.top = randomY + 'px';
+      }
+      
+      noBtn.addEventListener('click', function() {
+        // Increase scale factor
+        scaleFactor += growthRate;
+        
+        // Make growth accelerate
+        growthRate *= 1.1;
+        
+        // Apply scaling to YES button (will overflow container and body)
+        yesBtn.style.transform = `scale(${scaleFactor})`;
+        yesBtn.style.zIndex = '1000'; // Ensure it appears above other elements
+        
+        // Change text as it grows with clear visibility
+        if (scaleFactor > 3) {
+          yesBtn.textContent = 'PLEASE SAY YES! ';
+          yesBtn.style.fontSize = `${1.2/scaleFactor}em`; // Adjust font size relative to scale
+          yesBtn.style.padding = `${12/scaleFactor}px ${24/scaleFactor}px`; // Adjust padding
+        }
+        if (scaleFactor > 6) {
+          yesBtn.textContent = 'I REALLY LIKE YOU! ';
+          yesBtn.style.fontSize = `${1.2/scaleFactor}em`;
+          yesBtn.style.padding = `${12/scaleFactor}px ${24/scaleFactor}px`;
+        }
+        if (scaleFactor > 10) {
+          yesBtn.textContent = 'YOU CAN\'T ESCAPE! ';
+          yesBtn.style.fontSize = `${1.2/scaleFactor}em`;
+          yesBtn.style.padding = `${12/scaleFactor}px ${24/scaleFactor}px`;
+        }
+        
+        // Move NO button to random position
+        moveNoButton();
+      });
+      
+      // Redirect to yes.html when YES is clicked
+      yesBtn.addEventListener('click', function() {
+        window.location.href = 'yes.html';
+      });
+    });
+  </script>
+</body></html>
